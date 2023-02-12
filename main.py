@@ -19,6 +19,10 @@ def get_db():
     finally:
         db.close()
 
+@app.get("/")
+def index():
+    return "welcome"
+
 @app.post("/post", status_code=status.HTTP_201_CREATED)
 def create(request: TaskSchema, db: Session = Depends(get_db)):
     new_task = Task(body=request.body)
