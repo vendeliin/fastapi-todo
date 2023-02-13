@@ -20,7 +20,7 @@ def get_db():
         db.close()
 
 @app.get("/")
-def index():
+async def index():
     return "welcome"
 
 @app.post("/post", status_code=status.HTTP_201_CREATED)
