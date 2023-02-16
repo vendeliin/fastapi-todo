@@ -31,6 +31,12 @@ def create(request: TaskSchema, db: Session = Depends(get_db)):
     db.refresh(new_task)
     return new_task
 
+@app.delete("/task/{id}")
+def remove(request: TaskSchema, db: Session = Depends(get_db)):
+    db.query(Task).filter(Task.id == id).delete(synchronize_session=False)
+    db.commit()
+    return 'done'
+
 @app.get("/all", status_code=status.HTTP_200_OK)
 def show_all(db: Session = Depends(get_db)):
     tasks = db.query(Task).all()
