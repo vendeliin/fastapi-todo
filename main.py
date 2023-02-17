@@ -46,7 +46,7 @@ def create(request: TaskSchema, db: Session = Depends(get_db)):
     db.refresh(new_task)
     return new_task
 
-@app.delete("/delete-task/{id}")
+@app.get("/delete-task/{id}")
 def remove(request: TaskSchema, db: Session = Depends(get_db)):
     db.query(Task).filter(Task.id == id).delete(synchronize_session=False)
     db.commit()
